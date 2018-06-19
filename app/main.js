@@ -4,6 +4,10 @@ const {
     BrowserWindow
 } = require('electron');
 
+if (process.env.NODE_ENV !== 'production') {
+    require('electron-reload')(__dirname)
+}
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -17,7 +21,11 @@ function createWindow() {
 
     // and load the index.html of the app.
     if (process.env.NODE_ENV === 'production') {
-        mainWindow.loadURL(`file://${__dirname}/build/index.html`);
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, './build/index.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
     } else {
         mainWindow.loadURL('http://localhost:3000');
     }

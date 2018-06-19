@@ -20,7 +20,7 @@ class NavigationContainer extends React.Component {
                             </Link>
                             <Link to={'/webapi'} className={classNames('navbar-link', { 'navbar-link--active': this.props.currentPath === '/webapi' })} >
                                 <i className="fas fa-home" />
-                                <span>Web API</span>
+                                <span>REST</span>
                             </Link>
                         </li>               
                     </ul>
