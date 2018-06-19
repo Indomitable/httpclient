@@ -69,7 +69,7 @@ class RestRequestContainer extends React.Component {
                 </div>,
                 <div key="1" className="webapi-requests__body-headers">
                     <span>Headers:</span>
-                    <Editor mode='plain_text' value={this.props.response.headers} readOnly={true} />
+                    <Editor mode='properties' value={this.props.response.headers} readOnly={true} />
                 </div>,
                 <div key="2" className="webapi-requests__body-content">
                     <span>Content:</span>

@@ -6,7 +6,7 @@ const restActionsSetResponse = 'WEB_API_SET_RESPONSE';
 const restRequestInitialState = {    
     request: {
         method: 0,
-        endpoint: 'http://integration.bcdapi.itsfogo.com/v1/bettingoffer/grid/event/14186461?providers=Unas&x-bwin-accessid=ZTlmYWRkOWEtNWI4OS00MDc5LWJlYmYtNDc2NDE2YzQ3NzBj',
+        endpoint: 'https://restcountries.eu/rest/v2/capital/sofia',
         headers: {},
         body: ''
     },

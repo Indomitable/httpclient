@@ -62,3 +62,4 @@ app/build
 
 # misc
 .DS_Store
+.idea/workspace.xml
