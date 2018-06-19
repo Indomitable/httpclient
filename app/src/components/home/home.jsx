@@ -7,7 +7,8 @@ export class Home extends Component {
         super(props);
         this.state = {
             endpoint: '',
-            result: ''
+            response: '',
+            headers: '',
         };
 
         this.onInput = (event) => {
@@ -15,22 +16,22 @@ export class Home extends Component {
         };
 
         this.onLoad = async () => {
-            const res = await rest.get(this.endpoint);
+            const res = await rest.get(this.state.endpoint);
             this.setState({
                 ...this.state,
-                result: res
+                response: res.content,
+                headers: JSON.stringify(res.headers)
             });
         };
     }
-
-
     
     render() {
         return <div>
             <input type="text" value={this.state.endpoint} onChange={this.onInput} />
             <button onClick={this.onLoad}>LOAD</button>
 
-            <textarea value={this.state.result} readOnly={true}  />
+            <textarea value={this.state.response} readOnly={true} cols={50} rows={20} />
+            <textarea value={this.state.headers} readOnly={true}  cols={50} rows={20} />
         </div>;
     }
 }
