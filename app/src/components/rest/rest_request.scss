@@ -1,0 +1,71 @@
+.webapi-requests__container {
+    display: grid;
+    height: 100%;
+    grid-template-rows: 50px auto;
+}
+
+.webapi-requests__header {
+    display: grid;
+    grid-template-columns: 30px 200px auto 30px;
+    grid-template-rows: 50px;
+    align-items: center;
+    justify-content: stretch;
+    padding: 0 10px;
+
+    $height: 30px;
+
+    .webapi-requests__header-execute {
+        > button {
+            height: $height;
+            width: $height;
+            font-size: 20px;
+        }
+    }
+
+    .webapi-requests__header-method {
+        display: flex;
+        justify-content: center;
+
+        > span {
+            line-height: $height;
+        }
+
+        > select {
+            height: $height;
+        }
+    }
+
+    .webapi-requests__header-url {
+        display: flex;
+        padding-right: 10px;
+
+        > span {
+            line-height: $height;
+        }
+
+        > input {
+            height: $height;
+            margin-left: 5px;
+            flex: 1 0 50%;
+        }
+    }
+
+    .webapi-requests__header-save {
+        > button {
+            height: $height;
+            width: $height;
+            font-size: 20px;
+        }
+    }
+}
+
+.webapi-requests__body {
+    display: grid;
+    grid-template-rows: 20px 200px auto;
+
+    .webapi-requests__body-headers, .webapi-requests__body-content {
+        display: grid;
+        grid-template-rows: 20px auto;
+    }
+}
+

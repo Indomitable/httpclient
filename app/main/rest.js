@@ -6,14 +6,15 @@ const url = require('url');
 const querystring = require('querystring');
 
 class HttpClient {
-    constructor(endpoint, headers = {}) {
-        const { protocol, hostname, port, path } = url.parse(endpoint);
+    constructor(request) {
+        this.request = request;
+        const { protocol, hostname, port, path } = url.parse(request.endpoint);
         this.service = protocol === 'http:' ? http : https;
         this.options = {
             hostname,
             port,
             path,
-            headers
+            headers: request.headers
         };
     }
 
@@ -30,15 +31,14 @@ class HttpClient {
     };
 
     handleResponse(response) {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async resolve => {
             const { statusCode, headers } = response;
-            if (statusCode === 200) {
-                const content = await this.readResponse(response);
-                resolve({ content, headers });
-            } else {
-                response.resume();
-                reject(new Error(`${res.statusCode}: Error`));
-            }
+            const content = await this.readResponse(response);
+            resolve({
+                statusCode,
+                headers,
+                content
+            });
         });
     }
 
@@ -52,8 +52,8 @@ class HttpClient {
         });
     }
 
-    doPost(data) {
-        const postData = querystring.stringify(data);
+    doPost() {
+        const postData = querystring.stringify(request.data);
         const options = Object.assign({}, this.options, { method: 'POST' });
         return new Promise((resolve, reject) => {
             const request = this.service.request(options, response => {
@@ -61,7 +61,7 @@ class HttpClient {
                     .then((res) => resolve(res), (error) => reject(error));
             });
 
-            request.write(data);
+            request.write(postData);
             request.end();
         });
     }
@@ -70,12 +70,12 @@ class HttpClient {
 
 
 module.exports = {
-    get: function(url) {
-        const client = new HttpClient(url);
+    get: function(request) {
+        const client = new HttpClient(request);
         return client.doGet();
     },
-    post: function(url, data) {
-        const client = new HttpClient(url);
-        return client.doPost(data);
+    post: function(request) {
+        const client = new HttpClient(request);
+        return client.doPost();
     }
 }
