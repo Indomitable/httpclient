@@ -4,6 +4,8 @@ const {
     BrowserWindow
 } = require('electron');
 
+const path = require('path');
+
 if (process.env.NODE_ENV !== 'production') {
     require('electron-reload')(__dirname)
 }
@@ -21,11 +23,7 @@ function createWindow() {
 
     // and load the index.html of the app.
     if (process.env.NODE_ENV === 'production') {
-        mainWindow.loadURL(url.format({
-            pathname: path.join(__dirname, './build/index.html'),
-            protocol: 'file:',
-            slashes: true
-        }));
+        mainWindow.loadURL(`file://${__dirname}/build/index.html`);
     } else {
         mainWindow.loadURL('http://localhost:3000');
     }
