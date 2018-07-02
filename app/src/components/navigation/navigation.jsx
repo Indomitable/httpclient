@@ -32,7 +32,7 @@ class NavigationContainer extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    currentPath: state.routing.location ? state.routing.location.pathname : '/'
+    currentPath: state.router.location ? state.router.location.pathname : '/'
 });
 
 export const Navigation = connect(mapStateToProps)(NavigationContainer);

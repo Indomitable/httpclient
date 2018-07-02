@@ -5,6 +5,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
         "classnames": "^2.2.6",
+        "connected-react-router": "^4.3.0",
         "history": "^4.7.2",
         "react": "^16.4.1",
         "react-ace": "^6.1.1",
@@ -12,14 +13,14 @@
         "react-redux": "^5.0.7",
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
-        "react-router-redux": "^5.0.0-alpha.9",
+        "react-router-redux": "^4.0.8",
         "redux": "^4.0.0",
         "redux-thunk": "^2.3.0"
     },
     "scripts": {
         "test": "react-scripts test --env=jsdom",
-        "start": "rimraf ./build && concurrently -k \"parcel public/index.html --no-cache -p 3000 -d build/\" \"wait-on http://localhost:3000 && NODE_ENV=development electron main.js\" ",
-        "build": "rimraf ./build && parcel build ./public/index.html --no-cache -d ./build/ --public-url ./ && NODE_ENV=production electron ./main.js "
+        "start": "rimraf ./build && concurrently -k \"parcel serve src/index.html -t browser --no-cache -p 3000 -d build/ --hmr-hostname localhost\" \"wait-on http://localhost:3000 && cross-env NODE_ENV=development electron main.js\" ",
+        "build": "rimraf ./build && parcel build src/index.html -t electron --no-cache -d ./build/ --public-url ./ && cross-env NODE_ENV=production electron ./main.js "
     },
     "homepage": "./",
     "devDependencies": {
@@ -28,11 +29,12 @@
         "babel-preset-env": "^1.7.0",
         "babel-preset-react": "^6.24.1",
         "concurrently": "^3.5.1",
+        "cross-env": "^5.2.0",
         "electron": "^2.0.2",
         "electron-builder": "^20.15.1",
-        "electron-reload": "^1.2.2",
         "node-sass": "^4.9.0",
         "parcel-bundler": "^1.9.2",
+        "react-hot-loader": "^4.3.3",
         "rimraf": "^2.6.2",
         "typescript": "^2.9.2",
         "wait-on": "^2.1.0"

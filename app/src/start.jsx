@@ -19,8 +19,6 @@ const store = configureStore(history, initialState);
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <App />
-        </ConnectedRouter>
+        <App history={history} />
     </Provider>,
 document.getElementById('root'));

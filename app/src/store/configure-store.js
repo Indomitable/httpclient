@@ -1,9 +1,8 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
 
-import { appStateReducer } from './app.state';
-
+import rootReducer from './app.state';
 
 export default function configureStore(history, initialState) {
     const middleware = [
@@ -18,14 +17,18 @@ export default function configureStore(history, initialState) {
         enhancers.push(window.devToolsExtension());
     }
 
-    const rootReducer = combineReducers({
-        ...appStateReducer,
-        routing: routerReducer
-    });
-
-    return createStore(
-        rootReducer,
+    const store = createStore(
+        connectRouter(history)(rootReducer),
         initialState,
         compose(applyMiddleware(...middleware), ...enhancers)
     );
+
+    if (isDevelopment && module.hot) {
+        module.hot.accept(() => {
+            const nextRootReducer = require('./app.state');
+            store.replaceReducer(connectRouter(history)(nextRootReducer));
+        });
+    }
+    
+    return store;
 }

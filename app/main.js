@@ -6,10 +6,6 @@ const {
 
 const path = require('path');
 
-if (process.env.NODE_ENV !== 'production') {
-    require('electron-reload')(__dirname)
-}
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -25,7 +21,7 @@ function createWindow() {
     if (process.env.NODE_ENV === 'production') {
         mainWindow.loadURL(`file://${__dirname}/build/index.html`);
     } else {
-        mainWindow.loadURL('http://localhost:3000');
+       mainWindow.loadURL('http://localhost:3000');
     }
 
     // Open the DevTools.
