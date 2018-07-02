@@ -8,6 +8,8 @@ import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-regular.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './app.scss';
 
 class AppContainer extends React.Component {

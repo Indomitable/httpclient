@@ -33,13 +33,13 @@ class RestRequestContainer extends React.Component {
         return <div className="webapi-requests__container">
             <div className="webapi-requests__header">
                 <div className="webapi-requests__header-execute">
-                    <button onClick={this.executeBinded}>
+                    <button className="btn btn-sm btn-outline-primary" onClick={this.executeBinded}>
                         <i className="fas fa-arrow-right" />
                     </button>
                 </div>
                 <div className="webapi-requests__header-method">
                     <span>Method:</span>
-                    <select value={this.props.request.method} onChange={this.setMethodBinded}>
+                    <select className="form-control" value={this.props.request.method} onChange={this.setMethodBinded}>
                         <option value="0">GET</option>
                         <option value="1">POST</option>
                         <option value="2">PUT</option>
@@ -53,7 +53,7 @@ class RestRequestContainer extends React.Component {
                 </div>
                 <div className="webapi-requests__header-url">
                     <span>URL:</span>
-                    <input type='text' value={this.props.request.endpoint} onChange={this.setEndPointBinded} />
+                    <input type='text' className="form-control" value={this.props.request.endpoint} onChange={this.setEndPointBinded} />
                 </div>
                 <div className="webapi-requests__header-save">
                     <button>
@@ -83,6 +83,6 @@ class RestRequestContainer extends React.Component {
 }
 
 export const RestRequest = connect(
-    (state) => (state.rest),
+    (state) => (state.restCall),
     (dispatch) => bindActionCreators(restActions, dispatch)
 )(RestRequestContainer);

@@ -6,11 +6,11 @@ import './layout.scss';
 export class Layout extends React.Component {
     render() {
         return (
-            <div className="container">
-                <div className="col navigation">
+            <div className="hc-container">
+                <div className="hc-col hc-navigation">
                     <Navigation />
                 </div>
-                <div className="col content">
+                <div className="hc-col content">
                     {this.props.children}
                 </div>
             </div>

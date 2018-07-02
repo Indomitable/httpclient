@@ -6,20 +6,16 @@ import './navigation.scss';
 
 class NavigationContainer extends React.Component {
     render() {
-        return (<nav className="navbar">
-            <div className="navbar-content">
-                <div className="navbar-header">
+        return (<nav className="hc-navbar">
+            <div className="hc-navbar-content">
+                <div className="hc-navbar-header">
                     Http Client
                 </div>
                 <div>
-                    <ul className="navbar-items-container">
-                        <li className="navbar-item">
-                            <Link to={'/'} className={classNames('navbar-link', { 'navbar-link--active': this.props.currentPath === '/' })} >
-                                <i className="fas fa-home" />
-                                <span>Home</span>
-                            </Link>
-                            <Link to={'/webapi'} className={classNames('navbar-link', { 'navbar-link--active': this.props.currentPath === '/webapi' })} >
-                                <i className="fas fa-home" />
+                    <ul className="hc-navbar-items-container">
+                        <li className="hc-navbar-item">
+                            <Link to={'/webapi'} className={classNames('hc-navbar-link', { 'hc-navbar-link--active': this.props.currentPath === '/webapi' })} >
+                                <i className="fas fa-sitemap" />
                                 <span>REST</span>
                             </Link>
                         </li>               

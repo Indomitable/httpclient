@@ -78,7 +78,7 @@ export const restActions = {
         dispatch({ type: restActionsSetRequestEndpoint, payload: endpoint });
     },
     execute: () => async (dispatch, getState) => {
-        const { request } = getState().rest;
+        const { request } = getState().restCall;
         const response = await rest.get(request);
         dispatch({ type: restActionsSetResponse, payload: response });
     }

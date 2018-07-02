@@ -24,7 +24,7 @@ export default function configureStore(history, initialState) {
     );
 
     if (isDevelopment && module.hot) {
-        module.hot.accept(() => {
+        module.hot.accept('./app.state', () => {
             const nextRootReducer = require('./app.state');
             store.replaceReducer(connectRouter(history)(nextRootReducer));
         });
