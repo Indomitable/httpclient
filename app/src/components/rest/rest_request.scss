@@ -6,7 +6,7 @@
 
 .webapi-requests__header {
     display: grid;
-    grid-template-columns: 30px 200px auto 30px;
+    grid-template-columns: min-content 200px auto min-content;
     grid-template-rows: 50px;
     align-items: center;
     justify-content: stretch;
@@ -14,20 +14,22 @@
 
     $height: 30px;
 
-    .webapi-requests__header-execute {
+    .webapi-requests__header-execute,
+    .webapi-requests__header-save {
         > button {
-            //height: $height;
-            //width: $height;
-            font-size: 20px;
+            font-size: 17px;
         }
     }
 
     .webapi-requests__header-method {
         display: flex;
         justify-content: center;
+        align-items: center;
+        padding: 0 5px;
 
         > span {
             line-height: $height;
+            margin-right: 5px;
         }
 
         > select {
@@ -37,7 +39,7 @@
 
     .webapi-requests__header-url {
         display: flex;
-        padding-right: 10px;
+        padding-right: 5px;
 
         > span {
             line-height: $height;
@@ -47,14 +49,6 @@
             height: $height;
             margin-left: 5px;
             flex: 1 0 50%;
-        }
-    }
-
-    .webapi-requests__header-save {
-        > button {
-            height: $height;
-            width: $height;
-            font-size: 20px;
         }
     }
 }

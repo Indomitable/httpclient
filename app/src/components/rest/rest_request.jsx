@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { restActions } from './rest_request.state';
-import { Editor } from '../';
+// import { Editor } from '../';
 
 import './rest_request.scss';
+import MonacoEditor from "../editor/editor-monaco";
 
 class RestRequestContainer extends React.Component {
     constructor(props, context) {
@@ -56,8 +57,8 @@ class RestRequestContainer extends React.Component {
                     <input type='text' className="form-control" value={this.props.request.endpoint} onChange={this.setEndPointBinded} />
                 </div>
                 <div className="webapi-requests__header-save">
-                    <button>
-                        <i className="far fa-save"></i>
+                    <button className="btn btn-sm btn-danger">
+                        <i className="far fa-save" />
                     </button>
                 </div>
             </div>
@@ -69,11 +70,11 @@ class RestRequestContainer extends React.Component {
                 </div>,
                 <div key="1" className="webapi-requests__body-headers">
                     <span>Headers:</span>
-                    <Editor mode='properties' value={this.props.response.headers} readOnly={true} />
+                    <MonacoEditor language='yaml' value={this.props.response.headers} readOnly={true} />
                 </div>,
                 <div key="2" className="webapi-requests__body-content">
                     <span>Content:</span>
-                    <Editor mode='json' value={this.props.response.content} readOnly={true} />
+                    <MonacoEditor language='json' value={this.props.response.content} readOnly={true} />
                 </div>]) : null
                 } 
 
