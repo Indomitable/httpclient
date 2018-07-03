@@ -2,10 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { restActions } from './rest_request.state';
-// import { Editor } from '../';
+import Editor from "../editor/editor";
 
 import './rest_request.scss';
-import CodeMirrorEditor from "../editor/editor-monaco";
 
 class RestRequestContainer extends React.Component {
     constructor(props, context) {
@@ -70,13 +69,13 @@ class RestRequestContainer extends React.Component {
                 </div>,
                 <div key="1" className="webapi-requests__body-headers">
                     <span>Headers:</span>
-                    <CodeMirrorEditor language='yaml' value={this.props.response.headers} readOnly={true} />
+                    <Editor language='text/yaml' value={this.props.response.headers} readOnly={true} />
                 </div>,
                 <div key="2" className="webapi-requests__body-content">
                     <span>Content:</span>
-                    <CodeMirrorEditor language='coffee' value={this.props.response.content} readOnly={true} />
+                    <Editor language="application/json" value={this.props.response.content} readOnly={true} />
                 </div>]) : null
-                } 
+                }
 
             </div>
         </div>;

@@ -1,66 +1,59 @@
-// import React from 'react';
-// import AceEditor from 'react-ace';
-// import 'brace/mode/json';
-// import 'brace/mode/xml';
-// import 'brace/theme/monokai';
-//
-// export class Editor extends React.PureComponent {
-//     constructor(props, context) {
-//         super(props, context);
-//         this.editorRef = React.createRef();
-//     }
-//
-//     onLoadData() {
-//         if (this.content) {
-//             this.editorRef.current.editor.scrollToLine(1);
-//         }
-//     }
-//
-//     componentDidMount() {
-//         this.onLoadData();
-//     }
-//
-//     componentDidUpdate() {
-//         this.onLoadData();
-//     }
-//
-//     render() {
-//         // const { content, headers } = this.props.response;
-//         // const isJson = headers['content-type'].indexOf('json') > -1;
-//         //const isJSON = this.props.mode === 'json';
-//         if (this.props.mode === 'json' && this.props.value) {
-//             try {
-//                 this.content = JSON.stringify(JSON.parse(this.props.value), null, '\t')
-//             } catch (e) {
-//                 this.content = this.props.value;
-//                 console.error(e);
-//             }
-//         } else {
-//             this.content = this.props.value;
-//         }
-//
-//         const options = {
-//             tabSize: 2,
-//             readOnly: this.props.readOnly
-//         };
-//
-//
-//         return <div>
-//             {
-//                 this.props.readOnly ?
-//                 <AceEditor
-//                     mode={this.props.mode}
-//                     theme="monokai"
-//                     value={this.content}
-//                     readOnly={this.props.readOnly}
-//                     setOptions={options}
-//                     width='100%'
-//                     height={this.props.height || '100%'}
-//                     showPrintMargin={false}
-//                     ref={this.editorRef}
-//                     /> :
-//                 <AceEditor />
-//             }
-//         </div>
-//     }
-// }
+import * as React from "react";
+import CodeMirror from 'codemirror/lib/codemirror';
+import 'codemirror/mode/yaml/yaml';
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/dracula.css';
+
+import JsonFormat from '../../services/json-formatter';
+
+import './editor.scss';
+
+export default class Editor extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.container = React.createRef();
+    }
+
+    tryFormatValue() {
+        let content = this.props.value;
+        if (this.props.language === 'application/json' && this.props.value) {
+            try {
+                content =  (new JsonFormat(this.props.value)).beautify(); //JSON.stringify(JSON.parse(this.props.value), null, '\t')
+            } catch (e) {
+                content = this.props.value;
+                console.error(e);
+            }
+        }
+        return content;
+    }
+
+    componentDidMount() {
+        const content = this.tryFormatValue();
+        this.editor =  CodeMirror(this.container.current, {
+            mode: this.props.language,
+            value: content,
+            readOnly: this.props.readOnly,
+            theme: 'dracula'
+        });
+        // this.editor = monaco.editor.create(this.container.current, {
+        //     value: content,
+        //     language: this.props.language,
+        //     readOnly: this.props.readOnly,
+        //     minimap: {
+        //         enabled: false
+        //     }
+        // });
+    }
+
+    componentWillUnmount() {
+      //  this.editor.dispose();
+    }
+
+    render() {
+        return <div className="hc-codemirror-container">
+            {/*readOnly={true} value={this.props.value} */}
+            <div ref={this.container} />
+        </div>
+    }
+}
