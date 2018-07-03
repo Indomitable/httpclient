@@ -5,7 +5,7 @@ import { restActions } from './rest_request.state';
 // import { Editor } from '../';
 
 import './rest_request.scss';
-import MonacoEditor from "../editor/editor-monaco";
+import CodeMirrorEditor from "../editor/editor-monaco";
 
 class RestRequestContainer extends React.Component {
     constructor(props, context) {
@@ -70,11 +70,11 @@ class RestRequestContainer extends React.Component {
                 </div>,
                 <div key="1" className="webapi-requests__body-headers">
                     <span>Headers:</span>
-                    <MonacoEditor language='yaml' value={this.props.response.headers} readOnly={true} />
+                    <CodeMirrorEditor language='yaml' value={this.props.response.headers} readOnly={true} />
                 </div>,
                 <div key="2" className="webapi-requests__body-content">
                     <span>Content:</span>
-                    <MonacoEditor language='json' value={this.props.response.content} readOnly={true} />
+                    <CodeMirrorEditor language='coffee' value={this.props.response.content} readOnly={true} />
                 </div>]) : null
                 } 
 
