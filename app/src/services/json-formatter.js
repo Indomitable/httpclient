@@ -24,8 +24,7 @@ export default class JsonFormatter {
                 // Check if current context in string or property name
                 if (i === 0 || !inStr) {
                     inStr = true;
-                }
-                if (i > 0 && inStr && !(this.input[i-1] === '\\')) {
+                } else if (i > 0 && inStr && !(this.input[i-1] === '\\')) {
                     inStr = false;
                 }
             }

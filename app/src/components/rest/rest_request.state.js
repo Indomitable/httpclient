@@ -75,10 +75,12 @@ export const restActions = {
         dispatch({ type: restActionsSetRequestMethod, payload: method });
     },
     setEndPoint: (endpoint) => (dispatch) => {
-        dispatch({ type: restActionsSetRequestEndpoint, payload: endpoint });
+        dispatch({ type: restActionsSetRequestEndpoint, payload: endpoint.trim() });
     },
     execute: () => async (dispatch, getState) => {
         const { request } = getState().restCall;
+        // Set empty response to clean output
+        dispatch({ type: restActionsSetResponse, payload: restRequestInitialState.response });
         const response = await rest.get(request);
         dispatch({ type: restActionsSetResponse, payload: response });
     }

@@ -2,9 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { restActions } from './rest_request.state';
-import Editor from "../editor/editor";
+
+import RestResponse from "./rest_response";
+import RestRequestUrlAndMethod from "./rest_request_header";
 
 import './rest_request.scss';
+import {Nav, NavItem, NavLink, TabContent, TabPane} from "reactstrap";
 
 class RestRequestContainer extends React.Component {
     constructor(props, context) {
@@ -31,52 +34,24 @@ class RestRequestContainer extends React.Component {
     
     render() {
         return <div className="webapi-requests__container">
-            <div className="webapi-requests__header">
-                <div className="webapi-requests__header-execute">
-                    <button className="btn btn-sm btn-outline-primary" onClick={this.executeBinded}>
-                        <i className="fas fa-arrow-right" />
-                    </button>
-                </div>
-                <div className="webapi-requests__header-method">
-                    <span>Method:</span>
-                    <select className="form-control" value={this.props.request.method} onChange={this.setMethodBinded}>
-                        <option value="0">GET</option>
-                        <option value="1">POST</option>
-                        <option value="2">PUT</option>
-                        <option value="3">DELETE</option>
-                        <option value="4">HEAD</option>
-                        <option value="5">CONNECT</option>
-                        <option value="6">OPTIONS</option>
-                        <option value="7">TRACE</option>
-                        <option value="8">PATCH</option>
-                    </select>
-                </div>
-                <div className="webapi-requests__header-url">
-                    <span>URL:</span>
-                    <input type='text' className="form-control" value={this.props.request.endpoint} onChange={this.setEndPointBinded} />
-                </div>
-                <div className="webapi-requests__header-save">
-                    <button className="btn btn-sm btn-danger">
-                        <i className="far fa-save" />
-                    </button>
-                </div>
-            </div>
-            <div className="webapi-requests__body">
-                { this.props.response.statusCode > -1 ? ([
-                <div key="0" className="webapi-requests__body-status-code">
-                    <span>Status Code:</span>
-                    <span>{this.props.response.statusCode}</span>
-                </div>,
-                <div key="1" className="webapi-requests__body-headers">
-                    <span>Headers:</span>
-                    <Editor language='text/yaml' value={this.props.response.headers} readOnly={true} />
-                </div>,
-                <div key="2" className="webapi-requests__body-content">
-                    <span>Content:</span>
-                    <Editor language="application/json" value={this.props.response.content} readOnly={true} />
-                </div>]) : null
-                }
+            <RestRequestUrlAndMethod {...this.props.request} execute={this.executeBinded} setMethod={this.setMethodBinded} setEndPoint={this.setEndPointBinded} />
+            <div>
+                <Nav tabs>
+                    <NavItem>
+                        <NavLink>Request</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink active={true}>Response</NavLink>
+                    </NavItem>
+                </Nav>
+                <TabContent activeTab='response'>
+                    <TabPane tabId='request'>
 
+                    </TabPane>
+                    <TabPane tabId='response'>
+                        <RestResponse {...this.props.response} />
+                    </TabPane>
+                </TabContent>
             </div>
         </div>;
     }
