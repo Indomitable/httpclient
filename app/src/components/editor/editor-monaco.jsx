@@ -1,4 +1,5 @@
 import * as React from "react";
+// import * as monaco from 'monaco-editor';
 import 'monaco-editor/esm/vs/editor/browser/controller/coreCommands.js';
 import 'monaco-editor/esm/vs/editor/contrib/find/findController.js';
 import 'monaco-editor/esm/vs/editor/contrib/format/formatActions.js';
